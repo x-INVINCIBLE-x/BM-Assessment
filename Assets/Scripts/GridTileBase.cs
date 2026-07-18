@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class GridTileBase : MonoBehaviour
 {
-    private Vector2 position;
+    private Vector2Int _position;
 
-    public Vector2 Position => position;
+    public Vector2Int Position => _position;
 
-    public void Initialize(Vector2 pos)
+    public void Initialize(Vector2Int pos)
     {
-        position = pos;
+        _position = pos;
     }
 }

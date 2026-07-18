@@ -27,7 +27,7 @@ public class GridGenerator : MonoBehaviour
 
                 Vector3 position = _grid.GetCellCenterWorld(coordinates[index]); 
                 GridTileBase block = Instantiate(blockPrefab, position, Quaternion.identity, transform);
-                block.Initialize(position);
+                block.Initialize(new Vector2Int(x, z));
             }
         }
     }
