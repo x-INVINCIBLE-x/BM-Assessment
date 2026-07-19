@@ -24,8 +24,11 @@ public class GridAgent : MonoBehaviour
     [SerializeField] protected UnitType unitType;
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] protected float baseOffset = 1f;
+    [SerializeField] private float rotationSpeed = 360f;
 
     public static event Action<UnitType, Vector2Int> OnMoveCompleted;
+    public event Action<bool> OnMove;
+
     public bool IsMoving => _isMoving;
 
     protected Vector2Int _currPoint;
@@ -79,9 +82,30 @@ public class GridAgent : MonoBehaviour
     private IEnumerator MoveToRoutine(List<Vector2Int> path)
     {
         _isMoving = true;
+        OnMove?.Invoke(_isMoving);
 
         foreach (Vector2Int step in path)
         {
+            Vector2Int direction = step - _currPoint;
+
+            if (direction != Vector2Int.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(
+                    new Vector3(direction.x, 0f, direction.y));
+
+                while (Quaternion.Angle(transform.rotation, targetRotation) > 0.5f)
+                {
+                    transform.rotation = Quaternion.RotateTowards(
+                        transform.rotation,
+                        targetRotation,
+                        rotationSpeed * Time.deltaTime);
+
+                    yield return null;
+                }
+
+                transform.rotation = targetRotation;
+            }
+
             Vector3 startPosition = transform.position;
             Vector3 endPosition = grid.GetCellCenterWorld(
                 new Vector3Int(step.x, 0, step.y));
@@ -103,7 +127,10 @@ public class GridAgent : MonoBehaviour
         }
 
         OnMoveCompleted?.Invoke(unitType, path[^1]);
+        OnMovementFinished();
+
         _isMoving = false;
+        OnMove?.Invoke(_isMoving);
     }
 
     private Vector2Int FindNearestValidPoint(Vector2Int origin)
@@ -137,5 +164,8 @@ public class GridAgent : MonoBehaviour
 
         Debug.LogError($"{nameof(GridAgent)}: No open tile found anywhere on the grid.");
         return clamped;
+    }
+    protected virtual void OnMovementFinished()
+    {
     }
 }

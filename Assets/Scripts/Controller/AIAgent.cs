@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class AIAgent : GridAgent, IAI
 {
+    private Vector2Int lastDestination;
+
     public void Start()
     {
         OnMoveCompleted += OnAgentMove;
@@ -18,6 +20,7 @@ public class AIAgent : GridAgent, IAI
         if (type != UnitType.Player)
             return;
 
+        lastDestination = coordinate;
         MoveNear(coordinate);
     }
 
@@ -42,6 +45,16 @@ public class AIAgent : GridAgent, IAI
         {
             if (MoveTo(candidate)) return;
         }
+    }
+
+    protected override void OnMovementFinished()
+    {
+        Vector2Int direction = lastDestination - _currPoint;
+
+        if (direction == Vector2Int.zero)
+            return;
+
+        transform.forward = new Vector3(direction.x, 0f, direction.y);
     }
 
     private int ManhattanDistance(Vector2Int a, Vector2Int b) => Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);

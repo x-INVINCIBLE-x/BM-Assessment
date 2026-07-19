@@ -367,8 +367,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AIController
   unitType: 2
-  moveSpeed: 5
+  moveSpeed: 2
   baseOffset: 1
+  rotationSpeed: 600
 --- !u!1 &4989214709146986589
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,8 +379,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5653865762346791655}
-  - component: {fileID: 6607003421437021832}
   - component: {fileID: 6471586767651310010}
+  - component: {fileID: 8566809528126309843}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Untagged
@@ -404,31 +405,6 @@ Transform:
   - {fileID: 7186196497146595124}
   m_Father: {fileID: 4389283147712611091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &6607003421437021832
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4989214709146986589}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 0.8
-  m_Radius: 0.3
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.4, z: -0.1}
 --- !u!95 &6471586767651310010
 Animator:
   serializedVersion: 7
@@ -451,6 +427,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8566809528126309843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4989214709146986589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91c29864985b6a428a0e241808d21ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridAgentAnimator
+  agent: {fileID: 8502101004383823426}
+  moveBoolAnim: IsMoving
 --- !u!1 &5361599859517838362
 GameObject:
   m_ObjectHideFlags: 0

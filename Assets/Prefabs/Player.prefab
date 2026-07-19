@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   unitType: 1
-  moveSpeed: 5
+  moveSpeed: 3
   baseOffset: 1
+  rotationSpeed: 720
 --- !u!1 &5228966961663630616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,6 +1735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5232373119031327844}
   - component: {fileID: 5314722510719351124}
+  - component: {fileID: 4611323728089467352}
   m_Layer: 0
   m_Name: PolyArtWizardStandardMat
   m_TagString: Untagged
@@ -1768,7 +1770,7 @@ Animator:
   m_GameObject: {fileID: 5230556816088147580}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: bed7a092d53e7c748bd65db98cebf9d6, type: 3}
-  m_Controller: {fileID: 9100000, guid: 2890c9060ce4f6b45b4082d87f47b27e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8880c3401b5681a41bf64e01a190d29a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1780,6 +1782,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4611323728089467352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5230556816088147580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91c29864985b6a428a0e241808d21ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridAgentAnimator
+  agent: {fileID: 5585449807860033285}
+  moveBoolAnim: IsMoving
 --- !u!1 &5230561173487250770
 GameObject:
   m_ObjectHideFlags: 0
