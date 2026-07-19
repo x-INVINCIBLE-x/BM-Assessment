@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class AIAgent : GridAgent, IAI
 {
-    public override void Start()
+    public void Start()
     {
-        base.Start();
-
         OnMoveCompleted += OnAgentMove;
     }
 

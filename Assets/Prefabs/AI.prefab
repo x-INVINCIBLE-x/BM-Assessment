@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4988639273405985899
+--- !u!1 &4255340511671624845
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6764872124132638868}
-  - component: {fileID: 8781478347659163963}
-  - component: {fileID: 4254081364166751587}
-  - component: {fileID: 2680735587790675116}
-  - component: {fileID: 2900218113617912523}
+  - component: {fileID: 4389283147712611091}
+  - component: {fileID: 4453214802575164476}
+  - component: {fileID: 2518888803657623315}
+  - component: {fileID: 2906018987973054733}
+  - component: {fileID: 8502101004383823426}
   m_Layer: 0
-  m_Name: Forest
+  m_Name: AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6764872124132638868
+--- !u!4 &4389283147712611091
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4988639273405985899}
+  m_GameObject: {fileID: 4255340511671624845}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.28664, y: 3.46771, z: -0.40289}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8781478347659163963
+--- !u!33 &4453214802575164476
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4988639273405985899}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4254081364166751587
+  m_GameObject: {fileID: 4255340511671624845}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2518888803657623315
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4988639273405985899}
+  m_GameObject: {fileID: 4255340511671624845}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aaed8c54963481b4f8c876feda521a80, type: 2}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,13 +92,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2680735587790675116
-BoxCollider:
+--- !u!135 &2906018987973054733
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4988639273405985899}
+  m_GameObject: {fileID: 4255340511671624845}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -111,17 +111,24 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2900218113617912523
+--- !u!114 &8502101004383823426
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4988639273405985899}
+  m_GameObject: {fileID: 4255340511671624845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f863a5979a38fc8449259c4d179324e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 9162b66bd07a46f4e930387580112d24, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GridTileBase
+  m_EditorClassIdentifier: Assembly-CSharp::AIController
+  grid: {fileID: 0}
+  gridSettings: {fileID: 11400000, guid: 9e1a588380a6ce1479e32e9e7800c3ac, type: 2}
+  obstacleData: {fileID: 11400000, guid: 3ea8d562332e38b4b9e582f79cac5aa9, type: 2}
+  pathFinder: {fileID: 11400000, guid: 82e9a3abecfb2bb4cbfb93834d615722, type: 2}
+  unitType: 2
+  moveSpeed: 5
+  baseOffset: 1

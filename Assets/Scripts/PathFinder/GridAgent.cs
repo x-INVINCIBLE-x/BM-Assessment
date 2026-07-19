@@ -13,16 +13,15 @@ public enum UnitType
 public class GridAgent : MonoBehaviour
 {
     [Header("Grid")]
-    [SerializeField] protected Grid grid;
-    [SerializeField] protected GridSettings gridSettings;
-    [SerializeField] protected ObstacleData obstacleData;
+    protected Grid grid;
+    protected GridSettings gridSettings;
+    protected ObstacleData obstacleData;
 
     [Header("Path Finding")]
-    [SerializeField] protected PathFinder pathFinder;
+    protected PathFinder pathFinder;
 
     [Header("Settings")]
     [SerializeField] protected UnitType unitType;
-    [SerializeField] protected Vector2Int startingPoint;
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] protected float baseOffset = 1f;
 
@@ -37,13 +36,14 @@ public class GridAgent : MonoBehaviour
 
     private bool _isMoving;
 
-    public virtual void Start()
+    public void Initialize(Grid grid, GridSettings gridSettings, ObstacleData obstacleData,
+        PathFinder pathFinder , Vector2Int startingPoint)
     {
-        Initialize();
-    }
+        this.grid = grid;
+        this.gridSettings = gridSettings;
+        this.obstacleData = obstacleData;
+        this.pathFinder = pathFinder;
 
-    public void Initialize()
-    {
         if (!pathFinder.IsValid(startingPoint, gridSettings, obstacleData))
         {
             startingPoint = FindNearestValidPoint(startingPoint);
