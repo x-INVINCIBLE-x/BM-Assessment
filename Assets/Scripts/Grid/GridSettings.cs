@@ -7,4 +7,14 @@ public class GridSettings : ScriptableObject
 
     public Vector2Int GridSize => gridSize;
     public int TileCount => gridSize.x * gridSize.y;
+
+    public bool IsInBound(Vector2Int point)
+    {
+        return IsInBound(point.x, point.y);
+    }
+
+    public bool IsInBound(int x, int y)
+    {
+        return x >= 0 && y >= 0 && x < gridSize.x && y < gridSize.y;
+    }
 }

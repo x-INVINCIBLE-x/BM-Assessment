@@ -28,6 +28,11 @@ public class ObstacleData : ScriptableObject
         blockedTiles = newArray;
     }
 
+    public bool IsBlocked(Vector2Int point)
+    {
+        return IsBlocked(point.x, point.y);
+    }
+
     public bool IsBlocked(int x, int z)
     {
         if (gridSettings == null) return false;

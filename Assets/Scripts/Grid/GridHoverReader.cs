@@ -6,7 +6,15 @@ public class GridHoverReader : MonoBehaviour
     [SerializeField] private GameObject gridPosUI;
     [SerializeField] private TextMeshProUGUI positionText;
     [SerializeField] private Vector3 offset;
-    
+
+    [Header("Hover Effect")]
+    [SerializeField] private Color hoverColor = Color.yellow;
+    [SerializeField] private float hoverScale = 1.15f;
+
+    private Renderer _currentRenderer;
+    private Color _originalColor;
+    private Vector3 _originalScale;
+
     private GridTileBase _currentTile;
     private Camera _cam;
 
@@ -15,7 +23,6 @@ public class GridHoverReader : MonoBehaviour
         _cam = Camera.main;
         gridPosUI.SetActive(false);
     }
-
 
     void Update()
     {
@@ -26,6 +33,8 @@ public class GridHoverReader : MonoBehaviour
         {
             if (tile != _currentTile)
             {
+                ClearCurrentTile();
+
                 _currentTile = tile;
 
                 gridPosUI.SetActive(true);
@@ -33,12 +42,42 @@ public class GridHoverReader : MonoBehaviour
 
                 Vector2 pos = tile.Position;
                 positionText.text = $"({pos.x + 1}, {pos.y + 1})";
+
+                HighlightTile(tile);
             }
 
             return;
         }
 
+        ClearCurrentTile();
         _currentTile = null;
         gridPosUI.SetActive(false);
+    }
+
+    private void HighlightTile(GridTileBase tile)
+    {
+        _currentRenderer = tile.GetComponent<Renderer>();
+
+        if (_currentRenderer != null)
+        {
+            _originalColor = _currentRenderer.material.color;
+            _currentRenderer.material.color = hoverColor;
+        }
+
+        _originalScale = tile.transform.localScale;
+        tile.transform.localScale = _originalScale * hoverScale;
+    }
+
+    private void ClearCurrentTile()
+    {
+        if (_currentTile == null)
+            return;
+
+        if (_currentRenderer != null)
+            _currentRenderer.material.color = _originalColor;
+
+        _currentTile.transform.localScale = _originalScale;
+
+        _currentRenderer = null;
     }
 }
