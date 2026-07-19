@@ -7,4 +7,6 @@ public abstract class PathFinder : ScriptableObject
         Vector2Int start, Vector2Int end,
         GridSettings gridSettings, ObstacleData obstacleData
         );
+
+    public abstract bool IsValid(Vector2Int point, GridSettings gridSettings, ObstacleData obstacleData);
 }

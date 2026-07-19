@@ -63,7 +63,7 @@ public class BFSPathFinder : PathFinder
         return path;
     }
 
-    private bool IsValid(Vector2Int point, GridSettings gridSettings, ObstacleData obstacleData)
+    public override bool IsValid(Vector2Int point, GridSettings gridSettings, ObstacleData obstacleData)
     {
         if (gridSettings.IsInBound(point) && !obstacleData.IsBlocked(point))
             return true;
