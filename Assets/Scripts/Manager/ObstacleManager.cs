@@ -1,11 +1,22 @@
 using UnityEngine;
 
+/// <summary>
+/// Spawns obstacles based on the assigned ObstacleData asset.
+/// </summary>
 public class ObstacleManager : MonoBehaviour
 {
+    /// <summary>
+    /// Grid obstacle layout used for spawning.
+    /// </summary>
     [SerializeField] private ObstacleData obstacleData;
+
+    /// <summary>
+    /// Prefab instantiated for each blocked tile.
+    /// </summary>
     [SerializeField] private GameObject obstaclePrefab;
     [SerializeField] private Grid grid;
 
+    [Tooltip("Hight offset from Grid's position")]
     [SerializeField] private float heightOffset;
     
     private void Start()
@@ -13,6 +24,9 @@ public class ObstacleManager : MonoBehaviour
         GenerateObstacles();
     }
 
+    /// <summary>
+    /// Instantiates obstacles on every blocked grid cell.
+    /// </summary>
     private void GenerateObstacles()
     {
         if (obstacleData == null)

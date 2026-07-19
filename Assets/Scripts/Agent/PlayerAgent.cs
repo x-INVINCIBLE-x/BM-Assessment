@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Grid-controlled player that moves to the clicked tile.
+/// </summary>
 public class PlayerAgent : GridAgent
 {
     private Camera _cam;
@@ -9,6 +12,9 @@ public class PlayerAgent : GridAgent
         _cam = Camera.main;
     }
 
+    /// <summary>
+    /// Handles mouse input and requests movement to the selected grid tile.
+    /// </summary>
     private void Update()
     {
         if (IsMoving) return;

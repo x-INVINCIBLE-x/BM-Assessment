@@ -2,6 +2,9 @@
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// Custom inspector for editing obstacle data as a clickable grid.
+/// </summary>
 [CustomEditor(typeof(ObstacleData))]
 public class ObstacleDataEditor : Editor
 {
@@ -20,11 +23,13 @@ public class ObstacleDataEditor : Editor
             return;
         }
 
+        // Ensure the obstacle array matches the current grid dimensions.
         obstacleData.EnsureArraySize();
         EditorGUILayout.Space(10);
 
         EditorGUILayout.LabelField("Obstacle Matrix");
 
+        // Draw the obstacle grid. Red = blocked, White = walkable.
         Vector2Int size = obstacleData.GridSize;
         for (int z = size.y - 1; z >= 0; z--)
         {

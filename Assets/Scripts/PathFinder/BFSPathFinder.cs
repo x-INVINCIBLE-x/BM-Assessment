@@ -1,6 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Breadth-First Search (BFS) pathfinding implementation for grid movement.
+/// Finds the shortest path on an unweighted grid.
+/// </summary>
 [CreateAssetMenu(menuName = "Grid/Path/BFS Path Finder", fileName = "BFS Path Finder")]
 public class BFSPathFinder : PathFinder
 {
@@ -12,6 +16,9 @@ public class BFSPathFinder : PathFinder
         Vector2Int.left
     };
 
+    /// <summary>
+    /// Finds the shortest path between two grid positions using BFS.
+    /// </summary>
     public override List<Vector2Int> FindPath(
         Vector2Int start, Vector2Int end,
         GridSettings gridSettings, ObstacleData obstacleData
@@ -48,6 +55,9 @@ public class BFSPathFinder : PathFinder
         return parent.ContainsKey(end) ? CreatePath(parent, start, end) : null;
     }
 
+    /// <summary>
+    /// Reconstructs the final path from the parent lookup generated during the search.
+    /// </summary>
     private List<Vector2Int> CreatePath(Dictionary<Vector2Int, Vector2Int> parent, Vector2Int start, Vector2Int end)
     {
         List<Vector2Int> path = new();
@@ -63,6 +73,13 @@ public class BFSPathFinder : PathFinder
         return path;
     }
 
+    /// <summary>
+    /// Returns whether a grid position is within bounds and not blocked.
+    /// </summary>
+    /// <param name="point"> Coordinate to check. </param>
+    /// <param name="gridSettings"> Bound Check for Coordinate on specific Grid.</param>
+    /// <param name="obstacleData"> Obstacle Check for Coordinate on specific Grid. </param>
+    /// <returns> True if block is walkable (Is in Bound and has no Obstacle) </returns>
     public override bool IsValid(Vector2Int point, GridSettings gridSettings, ObstacleData obstacleData)
     {
         if (gridSettings.IsInBound(point) && !obstacleData.IsBlocked(point))

@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles Player and AI Placement
+/// </summary>
 public class LevelManager : MonoBehaviour
 {
     [Header("Grid")]
@@ -7,6 +10,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GridSettings gridSettings;
     [SerializeField] private ObstacleData obstacleData;
 
+    /// <summary>
+    /// Path Finder Algorithm used by Player and AI to get to their destination.
+    /// CAn be replaced to any other algorithm from Inspector.
+    /// </summary>
     [Header("Path Finding")]
     [SerializeField] private PathFinder pathFinder;
 
@@ -23,6 +30,9 @@ public class LevelManager : MonoBehaviour
         Initialize();
     }
 
+    /// <summary>
+    /// Instantiates and Initializes Player and AI
+    /// </summary>
     private void Initialize()
     {
         player = Instantiate(player);

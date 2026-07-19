@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Stores the dimensions of grid and also provides validity/boundary checks.
+/// </summary>
 [CreateAssetMenu(fileName = "GridSettings", menuName = "Grid/Grid Settings")]
 public class GridSettings : ScriptableObject
 {

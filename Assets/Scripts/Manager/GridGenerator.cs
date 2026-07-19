@@ -1,9 +1,19 @@
 using UnityEngine;
 
+/// <summary>
+/// Responsible for creating grid and placing tiles using Unity's Grid component
+/// </summary>
 [RequireComponent(typeof(Grid))]
 public class GridGenerator : MonoBehaviour
 {
+    /// <summary>
+    /// Provides the dimension of grid to generate.
+    /// </summary>
     [SerializeField] private GridSettings gridSettings;
+
+    /// <summary>
+    /// Block prefab used to create the Grid.
+    /// </summary>
     [SerializeField] private GridTileBase blockPrefab;
 
     private Grid _grid;
@@ -14,6 +24,10 @@ public class GridGenerator : MonoBehaviour
         _grid = GetComponent<Grid>();
     }
 
+    /// <summary>
+    /// Generates Grid by Instantiating blockPrefab based on gridSettings.
+    /// Unity' Grid component is used to help determine each block world position based on their index.
+    /// </summary>
     private void Start()
     {
         Vector2Int gridSize = gridSettings.GridSize;

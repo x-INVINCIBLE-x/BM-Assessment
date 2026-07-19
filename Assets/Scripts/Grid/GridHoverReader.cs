@@ -1,6 +1,9 @@
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Displays the hovered grid position and applies a visual highlight to the tile.
+/// </summary>
 public class GridHoverReader : MonoBehaviour
 {
     [SerializeField] private GameObject gridPosUI;
@@ -24,6 +27,9 @@ public class GridHoverReader : MonoBehaviour
         gridPosUI.SetActive(false);
     }
 
+    /// <summary>
+    /// Updates the hovered tile, UI, and highlight based on the mouse position.
+    /// </summary>
     void Update()
     {
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
@@ -54,6 +60,10 @@ public class GridHoverReader : MonoBehaviour
         gridPosUI.SetActive(false);
     }
 
+    /// <summary>
+    /// Applies color and size adjustment to currently selected tile.
+    /// </summary>
+    /// <param name="tile"></param>
     private void HighlightTile(GridTileBase tile)
     {
         _currentRenderer = tile.GetComponent<Renderer>();
@@ -68,6 +78,9 @@ public class GridHoverReader : MonoBehaviour
         tile.transform.localScale = _originalScale * hoverScale;
     }
 
+    /// <summary>
+    /// Restores the tile to its default state.
+    /// </summary>
     private void ClearCurrentTile()
     {
         if (_currentTile == null)

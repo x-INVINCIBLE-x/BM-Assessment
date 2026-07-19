@@ -10,6 +10,10 @@ public enum UnitType
     Enemy
 }
 
+/// <summary>
+/// Base class for any unit that moves on the grid using pathfinding.
+/// Handles movement, rotation, and grid position tracking.
+/// </summary>
 public class GridAgent : MonoBehaviour
 {
     [Header("Grid")]
@@ -26,9 +30,19 @@ public class GridAgent : MonoBehaviour
     [SerializeField] protected float baseOffset = 1f;
     [SerializeField] private float rotationSpeed = 360f;
 
+    /// <summary>
+    /// Raised when any GridAgent completes its movement.
+    /// </summary>
     public static event Action<UnitType, Vector2Int> OnMoveCompleted;
+
+    /// <summary>
+    /// Raised when this agent starts or stops moving.
+    /// </summary>
     public event Action<bool> OnMove;
 
+    /// <summary>
+    /// True while the agent is following a path.
+    /// </summary>
     public bool IsMoving => _isMoving;
 
     protected Vector2Int _currPoint;
@@ -39,6 +53,9 @@ public class GridAgent : MonoBehaviour
 
     private bool _isMoving;
 
+    /// <summary>
+    /// Initializes the agent and places it on the nearest valid grid cell.
+    /// </summary>
     public void Initialize(Grid grid, GridSettings gridSettings, ObstacleData obstacleData,
         PathFinder pathFinder , Vector2Int startingPoint)
     {
@@ -60,6 +77,10 @@ public class GridAgent : MonoBehaviour
         _currPoint = startingPoint;
     }
 
+    /// <summary>
+    /// Requests movement to the target grid position.
+    /// Returns false if movement cannot begin.
+    /// </summary>
     public bool MoveTo(Vector2Int destinationPoint)
     {
         if (_isMoving)
@@ -79,6 +100,9 @@ public class GridAgent : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Rotates and moves the agent along the calculated path.
+    /// </summary>
     private IEnumerator MoveToRoutine(List<Vector2Int> path)
     {
         _isMoving = true;
@@ -133,6 +157,9 @@ public class GridAgent : MonoBehaviour
         OnMove?.Invoke(_isMoving);
     }
 
+    /// <summary>
+    /// Finds the closest walkable tile using a breadth-first search.
+    /// </summary>
     private Vector2Int FindNearestValidPoint(Vector2Int origin)
     {
         Vector2Int size = gridSettings.GridSize;
@@ -165,6 +192,11 @@ public class GridAgent : MonoBehaviour
         Debug.LogError($"{nameof(GridAgent)}: No open tile found anywhere on the grid.");
         return clamped;
     }
+
+    /// <summary>
+    /// Called after the agent finishes moving.
+    /// Override to perform custom logic.
+    /// </summary>
     protected virtual void OnMovementFinished()
     {
     }

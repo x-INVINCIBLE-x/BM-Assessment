@@ -1,6 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Simple AI that follows the player by moving to the closest free tile
+/// adjacent to the player's current position.
+/// </summary>
 public class AIAgent : GridAgent, IAI
 {
     private Vector2Int lastDestination;
@@ -15,6 +19,9 @@ public class AIAgent : GridAgent, IAI
         OnMoveCompleted -= OnAgentMove;
     }
 
+    /// <summary>
+    /// Reacts when the player finishes moving and updates the AI's target.
+    /// </summary>
     private void OnAgentMove(UnitType type, Vector2Int coordinate)
     {
         if (type != UnitType.Player)
@@ -24,6 +31,9 @@ public class AIAgent : GridAgent, IAI
         MoveNear(coordinate);
     }
 
+    /// <summary>
+    /// Attempts to move to the nearest available tile adjacent to the target.
+    /// </summary>
     public void MoveNear(Vector2Int destination)
     {
         if (IsMoving) return;
@@ -47,6 +57,9 @@ public class AIAgent : GridAgent, IAI
         }
     }
 
+    /// <summary>
+    /// Faces the player after completing movement.
+    /// </summary>
     protected override void OnMovementFinished()
     {
         Vector2Int direction = lastDestination - _currPoint;
